@@ -38,3 +38,23 @@
 .p-fieldset-content-wrapper-expanding {
     overflow: hidden;
 }
+
+.p-flex {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.p-flex > .p-fieldset-legend {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.p-flex > .p-toggleable-content:not(.p-toggleable-content-collapsed) {
+    display: flex;
+    flex-grow: 1;
+}
+
+.p-flex > .p-toggleable-content > .p-fieldset-content {
+    flex-grow: 1;
+}
