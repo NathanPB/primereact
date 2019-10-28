@@ -5,6 +5,7 @@ interface FieldsetProps {
     legend?: any;
     className?: string;
     style?: object;
+    flex?: boolean;
     toggleable?: boolean;
     collapsed?: boolean;
     onExpand?(event: Event): void;

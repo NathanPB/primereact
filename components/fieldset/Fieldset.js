@@ -184,6 +184,8 @@ function (_Component) {
     value: function render() {
       var className = (0, _classnames.default)('p-fieldset p-component', this.props.className, {
         'p-fieldset-toggleable': this.props.toggleable
+      }, {
+        'p-flex': this.props.flex && !this.isCollapsed()
       });
       var collapsed = this.isCollapsed();
       var legend = this.renderLegend(collapsed);
@@ -212,7 +214,8 @@ _defineProperty(Fieldset, "defaultProps", {
   onExpand: null,
   onCollapse: null,
   onToggle: null,
-  onClick: null
+  onClick: null,
+  flex: false
 });
 
 _defineProperty(Fieldset, "propTypes", {
@@ -225,5 +228,6 @@ _defineProperty(Fieldset, "propTypes", {
   onExpand: _propTypes.default.func,
   onCollapse: _propTypes.default.func,
   onToggle: _propTypes.default.func,
-  onClick: _propTypes.default.func
+  onClick: _propTypes.default.func,
+  flex: _propTypes.default.bool
 });
