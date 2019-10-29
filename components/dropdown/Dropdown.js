@@ -99,7 +99,7 @@ function (_Component) {
         } else {
           this.show();
 
-          if (this.props.filter) {
+          if (this.props.filter && this.props.filterInputAutoFocus) {
             setTimeout(function () {
               _this2.filterInput.focus();
             }, 200);
@@ -553,6 +553,7 @@ function (_Component) {
           return _this8.nativeSelect = el;
         },
         required: this.props.required,
+        name: this.props.name,
         tabIndex: "-1",
         "aria-hidden": "true"
       }, placeHolderOption, option));
@@ -820,6 +821,7 @@ exports.Dropdown = Dropdown;
 
 _defineProperty(Dropdown, "defaultProps", {
   id: null,
+  name: null,
   value: null,
   options: null,
   optionLabel: null,
@@ -836,6 +838,7 @@ _defineProperty(Dropdown, "defaultProps", {
   appendTo: null,
   tabIndex: null,
   autoFocus: false,
+  filterInputAutoFocus: true,
   panelClassName: null,
   panelStyle: null,
   dataKey: null,
@@ -853,6 +856,7 @@ _defineProperty(Dropdown, "defaultProps", {
 
 _defineProperty(Dropdown, "propTypes", {
   id: _propTypes.default.string,
+  name: _propTypes.default.string,
   value: _propTypes.default.any,
   options: _propTypes.default.array,
   optionLabel: _propTypes.default.string,
@@ -869,6 +873,7 @@ _defineProperty(Dropdown, "propTypes", {
   appendTo: _propTypes.default.any,
   tabIndex: _propTypes.default.number,
   autoFocus: _propTypes.default.bool,
+  filterInputAutoFocus: _propTypes.default.bool,
   lazy: _propTypes.default.bool,
   panelClassName: _propTypes.default.string,
   panelstyle: _propTypes.default.object,

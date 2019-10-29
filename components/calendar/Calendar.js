@@ -115,6 +115,26 @@ function (_Component) {
       if (prevProps.tooltip !== this.props.tooltip) {
         if (this.tooltip) this.tooltip.updateContent(this.props.tooltip);else this.renderTooltip();
       }
+
+      if (!this.props.onViewDateChange && !this.viewStateChanged) {
+        var propValue = this.props.value;
+
+        if (Array.isArray(propValue)) {
+          propValue = propValue[0];
+        }
+
+        var prevPropValue = prevProps.value;
+
+        if (Array.isArray(prevPropValue)) {
+          prevPropValue = prevPropValue[0];
+        }
+
+        if (!prevPropValue && propValue || propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime()) {
+          this.setState({
+            viewDate: this.props.viewDate || propValue || new Date()
+          });
+        }
+      }
     }
   }, {
     key: "componentWillUnmount",
@@ -530,6 +550,7 @@ function (_Component) {
           value: value
         });
       } else {
+        this.viewStateChanged = true;
         this.setState({
           viewDate: value
         });
@@ -645,6 +666,7 @@ function (_Component) {
             value: value
           }
         });
+        this.viewStateChanged = true;
       }
     }
   }, {

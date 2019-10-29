@@ -617,6 +617,7 @@ function (_Component) {
         name: this.props.name,
         style: this.props.inputStyle,
         className: this.props.inputClassName,
+        maxLength: this.props.maxlength,
         onKeyUp: this.props.onKeyUp,
         onKeyDown: this.onInputKeyDown,
         onKeyPress: this.props.onKeyPress,

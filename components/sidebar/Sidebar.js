@@ -83,6 +83,10 @@ function (_Component) {
         this.enableModality();
       }
 
+      if (this.props.closeOnEscape) {
+        this.bindDocumentEscapeListener();
+      }
+
       if (this.closeIcon) {
         this.closeIcon.focus();
       }
@@ -154,19 +158,43 @@ function (_Component) {
     key: "onHide",
     value: function onHide() {
       this.unbindMaskClickListener();
+      this.unbindDocumentEscapeListener();
 
       if (this.props.modal) {
         this.disableModality();
       }
     }
   }, {
+    key: "bindDocumentEscapeListener",
+    value: function bindDocumentEscapeListener() {
+      var _this2 = this;
+
+      this.documentEscapeListener = function (event) {
+        if (event.which === 27) {
+          if (parseInt(_this2.container.style.zIndex, 10) === _DomHandler.default.getCurrentZIndex() + _this2.props.baseZIndex) {
+            _this2.onCloseClick(event);
+          }
+        }
+      };
+
+      document.addEventListener('keydown', this.documentEscapeListener);
+    }
+  }, {
+    key: "unbindDocumentEscapeListener",
+    value: function unbindDocumentEscapeListener() {
+      if (this.documentEscapeListener) {
+        document.removeEventListener('keydown', this.documentEscapeListener);
+        this.documentEscapeListener = null;
+      }
+    }
+  }, {
     key: "bindMaskClickListener",
     value: function bindMaskClickListener() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.maskClickListener) {
         this.maskClickListener = function (event) {
-          _this2.onCloseClick(event);
+          _this3.onCloseClick(event);
         };
 
         this.mask.addEventListener('click', this.maskClickListener);
@@ -183,12 +211,12 @@ function (_Component) {
   }, {
     key: "renderCloseIcon",
     value: function renderCloseIcon() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.props.showCloseIcon) {
         return _react.default.createElement("button", {
           ref: function ref(el) {
-            return _this3.closeIcon = el;
+            return _this4.closeIcon = el;
           },
           className: "p-sidebar-close p-link",
           onClick: this.onCloseClick
@@ -211,7 +239,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var className = (0, _classnames.default)('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position, {
         'p-sidebar-active': this.props.visible,
@@ -221,7 +249,7 @@ function (_Component) {
       var iconsTemplate = this.renderIconsTemplate();
       return _react.default.createElement("div", {
         ref: function ref(el) {
-          return _this4.container = el;
+          return _this5.container = el;
         },
         id: this.props.id,
         className: className,
@@ -246,6 +274,7 @@ _defineProperty(Sidebar, "defaultProps", {
   baseZIndex: 0,
   dismissable: true,
   showCloseIcon: true,
+  closeOnEscape: true,
   iconsTemplate: null,
   modal: true,
   onShow: null,
@@ -263,6 +292,7 @@ _defineProperty(Sidebar, "propTypes", {
   baseZIndex: _propTypes.default.number,
   dismissable: _propTypes.default.bool,
   showCloseIcon: _propTypes.default.bool,
+  closeOnEscape: _propTypes.default.bool,
   iconsTemplate: _propTypes.default.func,
   modal: _propTypes.default.bool,
   onShow: _propTypes.default.func,

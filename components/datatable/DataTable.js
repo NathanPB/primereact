@@ -307,8 +307,8 @@ function (_Component) {
           if (this.props.scrollable) {
             this.setScrollableItemsWidthOnExpandResize(null, this.tableWidthState, 0);
           } else {
-            this.tableViewChild.nativeElement.style.width = this.tableWidthState;
-            this.containerViewChild.nativeElement.style.width = this.tableWidthState;
+            this.table.style.width = this.tableWidthState;
+            this.container.style.width = this.tableWidthState;
           }
         }
 
@@ -1493,33 +1493,35 @@ function (_Component) {
         loader = this.renderLoader();
       }
 
-      if (this.props.scrollable) {
-        this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
-        var frozenColumns = this.getFrozenColumns(columns);
-        var scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
-        var frozenView, scrollableView;
+      if (Array.isArray(columns)) {
+        if (this.props.scrollable) {
+          this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
+          var frozenColumns = this.getFrozenColumns(columns);
+          var scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
+          var frozenView, scrollableView;
 
-        if (frozenColumns) {
-          frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
-        }
-
-        scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
-        tableContent = _react.default.createElement("div", {
-          className: "p-datatable-scrollable-wrapper"
-        }, frozenView, scrollableView);
-      } else {
-        var tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
-        var tableBody = this.createTableBody(value, columns);
-        var tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
-        tableContent = _react.default.createElement("div", {
-          className: "p-datatable-wrapper"
-        }, _react.default.createElement("table", {
-          style: this.props.tableStyle,
-          className: this.props.tableClassName,
-          ref: function ref(el) {
-            _this6.table = el;
+          if (frozenColumns) {
+            frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
           }
-        }, tableHeader, tableFooter, tableBody));
+
+          scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
+          tableContent = _react.default.createElement("div", {
+            className: "p-datatable-scrollable-wrapper"
+          }, frozenView, scrollableView);
+        } else {
+          var tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
+          var tableBody = this.createTableBody(value, columns);
+          var tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
+          tableContent = _react.default.createElement("div", {
+            className: "p-datatable-wrapper"
+          }, _react.default.createElement("table", {
+            style: this.props.tableStyle,
+            className: this.props.tableClassName,
+            ref: function ref(el) {
+              _this6.table = el;
+            }
+          }, tableHeader, tableFooter, tableBody));
+        }
       }
 
       return _react.default.createElement("div", {

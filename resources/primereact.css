@@ -177,6 +177,26 @@ button {
 .p-toggleable-content-exit-done {
     display: none;
 }
+
+/* Floating Label */
+.p-float-label {
+    display: block;
+    position:relative; 
+}
+
+.p-float-label > label {
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left: .25em;
+  top: 50%;
+  margin-top: -.5em;
+  transition: 0.3s ease all; 
+  -moz-transition: 0.3s ease all; 
+  -webkit-transition: 0.3s ease all;
+  color: #898989;
+  line-height: 1;
+}
 .p-accordion { 
     width: 100%; 
 }
@@ -811,9 +831,6 @@ input[type=text]::-ms-clear {
     }
 }
 
-.p-chart {
-    position: relative
-}
 .p-card-header img {
     width: 100%;
 }
@@ -837,6 +854,101 @@ input[type=text]::-ms-clear {
 
 .p-card-footer {
     padding-top: 1em;
+}
+.p-carousel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.p-carousel-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow: auto;
+    padding: 0 .5em;
+}
+
+.p-carousel-prev,
+.p-carousel-next {
+    align-self: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.p-carousel-prev span,
+.p-carousel-next span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p-carousel-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0 .1em;
+}
+
+.p-carousel-items-content {
+    overflow: hidden;
+    width: 100%;
+}
+
+.p-carousel-header,
+.p-carousel-footer {
+    padding: 0 .5em;
+    z-index: 1;
+}
+
+.p-carousel-items-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.p-carousel-items-container .p-carousel-item {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.p-carousel-dots-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: .5em;
+}
+
+/* Vertical */
+.p-carousel-vertical .p-carousel-container {
+    flex-direction: column;
+    width: 100%;
+}
+
+.p-carousel-vertical .p-carousel-items-container {
+    flex-direction: column;
+    height: 100%;
+}
+
+.p-carousel-vertical .p-carousel-dots-container {
+    margin: .75em 0;
+}
+
+/* Keyboard Support */
+.p-items-hidden .p-carousel-item {
+    visibility: hidden;
+}
+
+.p-items-hidden .p-carousel-item.p-carousel-item-active {
+    visibility: visible;
+}
+.p-chart {
+    position: relative
 }
 .p-checkbox {
     display: inline-block;
@@ -927,64 +1039,6 @@ input[type=text]::-ms-clear {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
-}
-.p-contextmenu {
-    width: 12.5em;
-    padding: .25em;
-    position: absolute;
-    display: none;
-}
-
-.p-contextmenu .p-menu-separator {
-    border-width: 1px 0 0 0;
-}
-
-.p-contextmenu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.p-contextmenu .p-submenu-list {
-    display: none;
-    position: absolute;
-    width: 12.5em;
-    padding: .25em;
-    z-index: 1;
-}
-
-.p-contextmenu .p-menuitem-active > .p-submenu-list {
-    display: block;
-}
-
-.p-contextmenu .p-menuitem-link {
-    padding: .25em;
-    display: block;
-    position: relative;
-}
-
-.p-contextmenu .p-menuitem-icon {
-    margin-right: .25em;
-    vertical-align: middle;
-}
-
-.p-contextmenu .p-menuitem-text {
-    vertical-align: middle;
-}
-
-.p-contextmenu .p-menuitem {
-    position: relative;
-}
-
-.p-contextmenu .p-menuitem-link .p-submenu-icon {
-    position: absolute;
-    margin-top: -.5em;
-    right: 0;
-    top: 50%;
-}
-
-.p-contextmenu .p-menuitem-active > .p-submenu > .p-submenu-list {
-    display: block !important;
 }
 .p-colorpicker {
     display: inline-block;
@@ -1100,6 +1154,64 @@ input[type=text]::-ms-clear {
     list-style-type: none; 
     margin: 0;
     padding: 0;
+}
+.p-contextmenu {
+    width: 12.5em;
+    padding: .25em;
+    position: absolute;
+    display: none;
+}
+
+.p-contextmenu .p-menu-separator {
+    border-width: 1px 0 0 0;
+}
+
+.p-contextmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.p-contextmenu .p-submenu-list {
+    display: none;
+    position: absolute;
+    width: 12.5em;
+    padding: .25em;
+    z-index: 1;
+}
+
+.p-contextmenu .p-menuitem-active > .p-submenu-list {
+    display: block;
+}
+
+.p-contextmenu .p-menuitem-link {
+    padding: .25em;
+    display: block;
+    position: relative;
+}
+
+.p-contextmenu .p-menuitem-icon {
+    margin-right: .25em;
+    vertical-align: middle;
+}
+
+.p-contextmenu .p-menuitem-text {
+    vertical-align: middle;
+}
+
+.p-contextmenu .p-menuitem {
+    position: relative;
+}
+
+.p-contextmenu .p-menuitem-link .p-submenu-icon {
+    position: absolute;
+    margin-top: -.5em;
+    right: 0;
+    top: 50%;
+}
+
+.p-contextmenu .p-menuitem-active > .p-submenu > .p-submenu-list {
+    display: block !important;
 }
 .p-datatable {
     position: relative;
@@ -2025,35 +2137,16 @@ input[type=text]::-ms-clear {
 }
 
 /* Floating Label */
-.p-float-label {
-    display: block;
-    position:relative; 
-}
-
-.p-float-label label {
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left: .25em;
-  top: 50%;
-  margin-top: -.5em;
-  transition: 0.3s ease all; 
-  -moz-transition: 0.3s ease all; 
-  -webkit-transition: 0.3s ease all;
-  color: #898989;
-  line-height: 1;
-}
-    
-.p-float-label input:focus ~ label,
-.p-float-label input.p-filled ~ label,
-.p-float-label .p-inputwrapper-focus ~ label,
-.p-float-label .p-inputwrapper-filled ~ label {
+.p-float-label > input:focus ~ label,
+.p-float-label > input.p-filled ~ label,
+.p-float-label > .p-inputwrapper-focus ~ label,
+.p-float-label > .p-inputwrapper-filled ~ label {
   top:-.75em;
   font-size:12px;
 }
 
-.p-float-label .input:-webkit-autofill ~ label {
-  top:-20px;
+.p-float-label > input:-webkit-autofill ~ label {
+  top:-.75em;
   font-size:12px;
 }
 .p-inputtextarea-resizable {
@@ -2063,6 +2156,23 @@ input[type=text]::-ms-clear {
 
 .p-fluid .p-inputtextarea {
     width: 100%;
+}
+
+/* Floating Label */
+.p-float-label > textarea ~ label {
+  left: .25em;
+  top: .75em;
+}
+
+.p-float-label > textarea:focus ~ label,
+.p-float-label > textarea.p-filled ~ label {
+  top:-.75em;
+  font-size:12px;
+}
+
+.p-float-label > textarea:-webkit-autofill ~ label {
+  top:-.75em;
+  font-size:12px;
 }
 .p-lightbox {
     position: fixed;

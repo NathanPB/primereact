@@ -511,7 +511,7 @@ function (_Component) {
       var className = (0, _classnames.default)('p-tree p-component', {
         'p-tree-selectable': this.props.selectionMode,
         'p-tree-loading': this.props.loading
-      });
+      }, this.props.className);
       var loader = this.renderLoader();
       var content = this.renderModel();
       var filter = this.renderFilter();
