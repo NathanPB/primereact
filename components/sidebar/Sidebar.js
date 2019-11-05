@@ -73,6 +73,14 @@ function (_Component) {
       if (prevProps.visible !== this.props.visible) {
         if (this.props.visible) this.onShow();else this.onHide();
       }
+
+      if (this.mask && prevProps.dismissable !== this.props.dismissable) {
+        if (this.props.dismissable) {
+          this.bindMaskClickListener();
+        } else {
+          this.unbindMaskClickListener();
+        }
+      }
     }
   }, {
     key: "onShow",

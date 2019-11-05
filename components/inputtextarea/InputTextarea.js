@@ -15,6 +15,8 @@ var _Tooltip = _interopRequireDefault(require("../tooltip/Tooltip"));
 
 var _DomHandler = _interopRequireDefault(require("../utils/DomHandler"));
 
+var _ObjectUtils = _interopRequireDefault(require("../utils/ObjectUtils"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -184,14 +186,9 @@ function (_Component) {
         'p-filled': this.props.value != null && this.props.value.toString().length > 0 || this.props.defaultValue != null && this.props.defaultValue.toString().length > 0,
         'p-inputtextarea-resizable': this.props.autoResize
       });
-      var textareaProps = Object.assign({}, this.props);
-      delete textareaProps.autoResize;
-      delete textareaProps.onFocus;
-      delete textareaProps.onBlur;
-      delete textareaProps.onKeyUp;
-      delete textareaProps.onInput;
-      delete textareaProps.tooltip;
-      delete textareaProps.tooltipOptions;
+
+      var textareaProps = _ObjectUtils.default.findDiffKeys(this.props, InputTextarea.defaultProps);
+
       return _react.default.createElement("textarea", _extends({}, textareaProps, {
         className: className,
         ref: function ref(input) {

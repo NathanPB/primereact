@@ -438,6 +438,17 @@ function (_Component) {
       return !this.props.value || this.props.value.length === 0;
     }
   }, {
+    key: "getSelectedItemsLabel",
+    value: function getSelectedItemsLabel() {
+      var pattern = /{(.*?)}/;
+
+      if (pattern.test(this.props.selectedItemsLabel)) {
+        return this.props.selectedItemsLabel.replace(this.props.selectedItemsLabel.match(pattern)[0], this.props.value.length + '');
+      }
+
+      return this.props.selectedItemsLabel;
+    }
+  }, {
     key: "getLabel",
     value: function getLabel() {
       var label;
@@ -452,6 +463,12 @@ function (_Component) {
 
           label += this.findLabelByValue(this.props.value[i]);
         }
+
+        if (this.props.value.length <= this.props.maxSelectedLabels) {
+          return label;
+        } else {
+          return this.getSelectedItemsLabel();
+        }
       }
 
       return label;
@@ -462,12 +479,16 @@ function (_Component) {
       var _this5 = this;
 
       if (this.props.selectedItemTemplate) {
-        if (this.props.value && this.props.value.length) {
-          return this.props.value.map(function (val, index) {
-            return _react.default.createElement(_react.default.Fragment, {
-              key: index
-            }, _this5.props.selectedItemTemplate(val));
-          });
+        if (!this.isEmpty()) {
+          if (this.props.value.length <= this.props.maxSelectedLabels) {
+            return this.props.value.map(function (val, index) {
+              return _react.default.createElement(_react.default.Fragment, {
+                key: index
+              }, _this5.props.selectedItemTemplate(val));
+            });
+          } else {
+            return this.getSelectedItemsLabel();
+          }
         } else {
           return this.props.selectedItemTemplate();
         }
@@ -600,6 +621,8 @@ _defineProperty(MultiSelect, "defaultProps", {
   appendTo: null,
   tooltip: null,
   tooltipOptions: null,
+  maxSelectedLabels: 3,
+  selectedItemsLabel: '{0} items selected',
   itemTemplate: null,
   selectedItemTemplate: null,
   onChange: null,
@@ -624,6 +647,8 @@ _defineProperty(MultiSelect, "propTypes", {
   appendTo: _propTypes.default.object,
   tooltip: _propTypes.default.string,
   tooltipOptions: _propTypes.default.object,
+  maxSelectedLabels: _propTypes.default.number,
+  selectedItemsLabel: _propTypes.default.string,
   itemTemplate: _propTypes.default.func,
   selectedItemTemplate: _propTypes.default.func,
   onChange: _propTypes.default.func,

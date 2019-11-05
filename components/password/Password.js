@@ -17,6 +17,8 @@ var _DomHandler = _interopRequireDefault(require("../utils/DomHandler"));
 
 var _Tooltip = _interopRequireDefault(require("../tooltip/Tooltip"));
 
+var _ObjectUtils = _interopRequireDefault(require("../utils/ObjectUtils"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -224,15 +226,8 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      var inputProps = Object.assign({}, this.props);
-      delete inputProps.onFocus;
-      delete inputProps.onBlur;
-      delete inputProps.onKeyUp;
-      delete inputProps.promptLabel;
-      delete inputProps.weakLabel;
-      delete inputProps.mediumLabel;
-      delete inputProps.strongLabel;
-      delete inputProps.feedback;
+      var inputProps = _ObjectUtils.default.findDiffKeys(this.props, Password.defaultProps);
+
       return _react.default.createElement(_InputText.InputText, _extends({
         ref: function ref(el) {
           return _this4.inputEl = _reactDom.default.findDOMNode(el);

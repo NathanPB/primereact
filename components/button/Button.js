@@ -13,6 +13,8 @@ var _classnames = _interopRequireDefault(require("classnames"));
 
 var _Tooltip = _interopRequireDefault(require("../tooltip/Tooltip"));
 
+var _ObjectUtils = _interopRequireDefault(require("../utils/ObjectUtils"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -120,12 +122,9 @@ function (_Component) {
       });
       var icon = this.renderIcon();
       var label = this.renderLabel();
-      var buttonProps = Object.assign({}, this.props);
-      delete buttonProps.iconPos;
-      delete buttonProps.icon;
-      delete buttonProps.label;
-      delete buttonProps.tooltip;
-      delete buttonProps.tooltipOptions;
+
+      var buttonProps = _ObjectUtils.default.findDiffKeys(this.props, Button.defaultProps);
+
       return _react.default.createElement("button", _extends({
         ref: function ref(el) {
           return _this.element = el;
