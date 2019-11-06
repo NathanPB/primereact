@@ -66,6 +66,33 @@ export class TabViewDemo extends Component {
                             
                         </TabPanel>
                     </TabView>
+                    
+                    <h3>Flexible</h3>
+                    <div style={{
+                        height: 512,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        borderRadius: 3,
+                        border: 'solid 1px #c8c8c8',
+                        padding: '1em',
+                        marginTop: '2em'
+                    }}>
+                        <TabView style={{ flexGrow: 30 }} flex>
+                            <TabPanel header="Header I">Content I</TabPanel>
+                            <TabPanel header="Header II">Content II</TabPanel>
+                            <TabPanel header="Header III">Content III</TabPanel>
+                        </TabView>
+                        <TabView style={{ flexGrow: 60 }} flex>
+                            <TabPanel header="Header I">Content I</TabPanel>
+                            <TabPanel header="Header II">Content II</TabPanel>
+                            <TabPanel header="Header III">Content III</TabPanel>
+                        </TabView>
+                        <TabView style={{ flexGrow: 10 }} flex>
+                            <TabPanel header="Header I">Content I</TabPanel>
+                            <TabPanel header="Header II">Content II</TabPanel>
+                            <TabPanel header="Header III">Content III</TabPanel>
+                        </TabView>
+                    </div>
                 </div>
                 <TabViewDoc></TabViewDoc>
             </div>
@@ -136,6 +163,39 @@ import {TabView,TabPanel} from 'primereact/tabview';
 `}
 </CodeHighlight>
 
+            <h3>Flexible TabPanels</h3>
+                        <p>Flexible TabPanels are meant to fit its body in a <i>display: flex</i> parent. Its possible to exchange the size ratio by manually specifying the <i>flex-grow</i> property with CSS.</p>
+
+<CodeHighlight className="language-jsx">
+{`
+<div style={{
+    height: 512,
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: 3,
+    border: 'solid 1px #c8c8c8',
+    padding: '1em',
+    marginTop: '2em'
+}}>
+    <TabView style={{ flexGrow: 30 }} flex>
+        <TabPanel header="Header I">Content I</TabPanel>
+        <TabPanel header="Header II">Content II</TabPanel>
+        <TabPanel header="Header III">Content III</TabPanel>
+    </TabView>
+    <TabView style={{ flexGrow: 60 }} flex>
+        <TabPanel header="Header I">Content I</TabPanel>
+        <TabPanel header="Header II">Content II</TabPanel>
+        <TabPanel header="Header III">Content III</TabPanel>
+    </TabView>
+    <TabView style={{ flexGrow: 10 }} flex>
+        <TabPanel header="Header I">Content I</TabPanel>
+        <TabPanel header="Header II">Content II</TabPanel>
+        <TabPanel header="Header III">Content III</TabPanel>
+    </TabView>
+</div>
+`}
+</CodeHighlight>
+                        
             <h3>Properties For TabPanel</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -235,6 +295,12 @@ import {TabView,TabPanel} from 'primereact/tabview';
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the tabview.</td>
+                        </tr>
+                        <tr>
+                            <td>flex</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Defines a Flexible TabView</td>
                         </tr>
                         <tr>
                             <td>renderActiveOnly</td>
