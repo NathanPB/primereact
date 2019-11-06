@@ -36,6 +36,7 @@ export class TabView extends Component {
         activeIndex: 0,
         style: null,
         className: null,
+        flex: false,
         renderActiveOnly: true,
         onTabChange: null
     }
@@ -45,6 +46,7 @@ export class TabView extends Component {
         activeIndex: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
+        flex: PropTypes.bool,
         renderActiveOnly: PropTypes.bool,
         onTabChange: PropTypes.func
     };
@@ -145,7 +147,7 @@ export class TabView extends Component {
     }
 
     render() {
-        const className = classNames('p-tabview p-component p-tabview-top', this.props.className)
+        const className = classNames('p-tabview p-component p-tabview-top', this.props.className, {'p-tabview-flex': this.props.flex});
         const navigator = this.renderNavigator();
         const content = this.renderContent();
         
