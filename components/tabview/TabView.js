@@ -210,7 +210,9 @@ function (_Component2) {
   }, {
     key: "render",
     value: function render() {
-      var className = (0, _classnames.default)('p-tabview p-component p-tabview-top', this.props.className);
+      var className = (0, _classnames.default)('p-tabview p-component p-tabview-top', this.props.className, {
+        'p-tabview-flex': this.props.flex
+      });
       var navigator = this.renderNavigator();
       var content = this.renderContent();
       return _react.default.createElement("div", {
@@ -231,6 +233,7 @@ _defineProperty(TabView, "defaultProps", {
   activeIndex: 0,
   style: null,
   className: null,
+  flex: false,
   renderActiveOnly: true,
   onTabChange: null
 });
@@ -240,6 +243,7 @@ _defineProperty(TabView, "propTypes", {
   activeIndex: _propTypes.default.number,
   style: _propTypes.default.object,
   className: _propTypes.default.string,
+  flex: _propTypes.default.bool,
   renderActiveOnly: _propTypes.default.bool,
   onTabChange: _propTypes.default.func
 });

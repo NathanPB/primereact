@@ -145,3 +145,18 @@
 .p-rtl .p-tabview .p-tabview-nav li {
     float: right;
 }
+
+.p-tabview-flex {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.p-tabview-flex > .p-tabview-panels {
+    display: flex;
+    flex-grow: 1;
+}
+
+.p-tabview-flex > .p-tabview-panels > * {
+    flex-grow: 1;
+}
